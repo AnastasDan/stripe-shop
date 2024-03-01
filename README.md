@@ -28,14 +28,14 @@ docker compose -f docker-compose.yml exec backend python manage.py migrate
 docker compose -f docker-compose.yml exec backend python manage.py createsuperuser
 ```
 
-5. Добавление скидки и налога
+5. Добавление скидки и налога.
 
 Реализована возможность автоматического создания дефолтной скидки и налога при запуске проекта:
 
 ```bash
-docker compose -f docker-compose.yml exec backend python manage.py create_discount
+docker compose -f docker-compose.yml exec backend python manage.py create_discounts
 
-docker compose -f docker-compose.yml exec backend python manage.py create_tax
+docker compose -f docker-compose.yml exec backend python manage.py create_taxes
 ```
 
 6. Проект доступен по адресу: <http://localhost:9000/>
@@ -44,31 +44,31 @@ docker compose -f docker-compose.yml exec backend python manage.py create_tax
 
 ### Основные Возможности
 
-#### Просмотр товаров
+#### 1. Просмотр товаров
 
 Пользователи могут просматривать список доступных товаров на странице `http://localhost:9000/items/`.
 
-#### Оформление заказа для товара
+#### 2. Оформление заказа для товара
 
 Пользователи могут перейти на страницу каждого товара (`http://localhost:9000/item/<id>/`) для детального просмотра и оформления покупки.
 
-#### Создание сеанса Stripe для товара
+#### 3. Создание сеанса Stripe для товара
 
 При нажатии на кнопку покупки, система создает сеанс Stripe (`http://localhost:9000/buy_item/<item_id>/`), чтобы пользователь мог осуществить оплату.
 
-#### Просмотр списка заказов
+#### 4. Просмотр списка заказов
 
 Пользователи могут просматривать все свои заказы на странице `http://localhost:9000/orders/`.
 
-#### Оформление заказа
+#### 5. Оформление заказа
 
 Пользователи могут оформить заказ на странице `http://localhost:9000/order/<id>/`, где отображаются все товары в заказе.
 
-#### Создание сеанса Stripe для заказа
+#### 6. Создание сеанса Stripe для заказа
 
 Аналогично отдельным товарам, при нажатии на кнопку оформления заказа, создается сеанс Stripe (`http://localhost:9000/buy_order/<order_id>/`) для оплаты всего заказа.
 
-### Управление Товарами и Заказами
+### 7. Управление Товарами и Заказами
 
 Все товары и заказы управляются через административную панель Django `http://localhost:9000/admin/`. Администратор может добавлять, удалять и редактировать товары и заказы.
 
