@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Список заказов{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="text-center">Список заказов</h1>
+    <table class="table table-bordered mx-auto">
+      <thead class="text-center">
+        <tr>
+          <th>ID заказа</th>
+          <th>Дата создания</th>
+          <th>Общая стоимость (без учета скидки и налога)</th>
+          <th>Детали</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if orders %}
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.created_at }}</td>
+              <td>{{ order.total_price }} {{ order.items.first.currency }}</td>
+              <td><a href="{% url 'order_detail' id=order.id %}" class="btn btn-primary">Просмотр</a></td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4"><p>Нет доступных заказов.</p></td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

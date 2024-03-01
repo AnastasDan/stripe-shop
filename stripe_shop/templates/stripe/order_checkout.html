@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="text-center">Заказ #{{ order.id }}</h1>
+    <ul class="list-group">
+      {% for item in order.items.all %}
+        <li class="list-group-item">{{ item.name }} - {{ item.price }} {{ order.items.first.currency }}</li>
+      {% endfor %}
+    </ul>
+    <p class="mt-3">Общая стоимость (без учета скидки и налога): {{ order.total_price }} {{ order.items.first.currency }}</p>
+    {% if order.discount %}
+      <p>Скидка: {{ order.discount.percent_off }}%</p>
+    {% endif %}
+    {% if order.tax %}
+      <p>Налог: {{ order.tax.percentage }}%</p>
+    {% endif %}
+    <p class="mt-3">При переходе в форму оплаты вы увидите цену с учетом скидки и налога.</p>
+    <button id="buyOrderButton" class="btn btn-primary mt-3">Оплатить заказ</button>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('{{ public_key }}');
+
+    document.getElementById('buyOrderButton').addEventListener('click', () => {
+      fetch('/buy_order/{{ order.id }}')
+        .then((response) => response.json())
+        .then((session) => {
+          if(session.error) {
+            alert(session.error);
+          } else {
+            return stripe.redirectToCheckout({ sessionId: session.sessionId });
+          }
+        })
+        .then((result) => {
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
+  </script>
+{% endblock %}

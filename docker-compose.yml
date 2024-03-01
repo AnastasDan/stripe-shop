@@ -1,0 +1,17 @@
+version: '3'
+
+
+volumes:
+  pg_data:
+
+services:
+  db:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    build: ./stripe_shop/
+    env_file: .env
+    ports:
+      - "9000:9000"
