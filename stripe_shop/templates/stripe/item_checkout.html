@@ -19,7 +19,7 @@
     const stripe = Stripe('{{ public_key }}');
 
     document.getElementById('buyButton').addEventListener('click', () => {
-      fetch('/buy_item/{{ item.id }}')
+      fetch('/buy/{{ item.id }}')
         .then((response) => response.json())
         .then((session) => {
           if(session.error) {

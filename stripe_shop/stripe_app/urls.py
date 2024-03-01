@@ -17,7 +17,7 @@ urlpatterns = [
     path("items/", ItemsListView.as_view(), name="items_list"),
     path("item/<int:id>/", ItemCheckoutView.as_view(), name="item_detail"),
     path(
-        "buy_item/<int:item_id>/",
+        "buy/<int:item_id>/",
         get_stripe_session_id_for_item,
         name="buy_item",
     ),
