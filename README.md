@@ -40,9 +40,9 @@ docker compose -f docker-compose.yml exec backend python manage.py create_taxes
 
 6. Проект доступен по адресу: <http://localhost:9000/>
 
-## Функционал Приложения Stripe Shop
+## Функционал приложения Stripe Shop
 
-### Основные Возможности
+### Основные возможности
 
 #### 1. Просмотр товаров
 
@@ -68,7 +68,7 @@ docker compose -f docker-compose.yml exec backend python manage.py create_taxes
 
 Аналогично отдельным товарам, при нажатии на кнопку оформления заказа, создается сеанс Stripe (`http://localhost:9000/buy_order/<order_id>/`) для оплаты всего заказа.
 
-### 7. Управление Товарами и Заказами
+### 7. Управление товарами и Заказами
 
 Все товары и заказы управляются через административную панель Django `http://localhost:9000/admin/`. Администратор может добавлять, удалять и редактировать товары и заказы.
 
